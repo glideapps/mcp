@@ -1,0 +1,11 @@
+{
+	"name": "glide",
+	"version": "1.0.0",
+	"description": "Build, manage, and operate GlideOS apps, data, and workflows from Gemini CLI.",
+	"contextFileName": "GEMINI.md",
+	"mcpServers": {
+		"glide": {
+			"httpUrl": "https://mcp.glideapps.dev/mcp"
+		}
+	}
+}
