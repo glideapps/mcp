@@ -1,0 +1,14 @@
+{
+	"$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+	"name": "glide",
+	"version": "1.0.1",
+	"description": "Glide's official MCP server — build, manage, and operate GlideOS apps, data, and workflows.",
+	"author": {
+		"name": "Glide",
+		"url": "https://www.glideapps.com"
+	},
+	"homepage": "https://www.glideapps.com/docs/os/mcp",
+	"repository": "https://github.com/glideapps/mcp",
+	"license": "MIT",
+	"keywords": ["glide", "glideos", "apps", "no-code", "database", "workflows", "automation"]
+}
