@@ -52,6 +52,8 @@ Or add to `~/.cursor/mcp.json`:
 }
 ```
 
+This repository is also packaged as an [Agent Plugin](https://agent-plugins.org) (`plugin.json` + `mcp.json`), the format behind [Cursor's plugin directory](https://cursor.directory/plugins).
+
 ### VS Code
 
 ```bash
@@ -76,7 +78,7 @@ In **Settings → Connectors**, add a custom connector with the URL `https://mcp
 
 - Glide documentation: https://www.glideapps.com/docs
 - Product questions and account help: https://www.glideapps.com/support
-- Bugs in the Gemini CLI extension or errors in this README: open an issue on this repository
+- Bugs in the Gemini CLI extension or Agent Plugin manifests, or errors in this README: open an issue on this repository
 
 ## License
 
