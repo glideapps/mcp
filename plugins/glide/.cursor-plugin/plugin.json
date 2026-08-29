@@ -13,7 +13,7 @@
   "homepage": "https://www.glideapps.com/docs/os/mcp",
   "repository": "https://github.com/glideapps/mcp",
   "license": "MIT",
-  "logo": "assets/logo.png",
+  "logo": "assets/logo.svg",
   "keywords": [
     "glide",
     "glideos",

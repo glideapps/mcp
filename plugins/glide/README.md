@@ -50,10 +50,6 @@ Ask Cursor things like:
 - Glide MCP setup: https://www.glideapps.com/docs/os/mcp
 - Glide documentation: https://www.glideapps.com/docs
 
-## Logo
-
-Glide's official symbol: the white mark on the `#1F2024` brand tile, sized 288×288 so it reads well in the Cursor UI.
-
 ## License
 
 MIT
