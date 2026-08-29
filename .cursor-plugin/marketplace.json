@@ -1,7 +1,8 @@
 {
   "name": "glide",
   "owner": {
-    "name": "Glide"
+    "name": "Glide",
+    "email": "cait@heyglide.com"
   },
   "metadata": {
     "description": "Glide's official plugins for AI coding agents"
