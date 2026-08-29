@@ -38,6 +38,12 @@ Go to **Settings → Connectors → Add custom connector** and enter `https://mc
 
 ### Cursor
 
+Install the **Glide** plugin from the Cursor Marketplace: open **Settings → Plugins**, search for **Glide**, and click **Install**. Or run `/add-plugin glide` in chat.
+
+The plugin lives in [`plugins/glide`](plugins/glide) and requires Cursor 3.13.0 or later.
+
+To configure the MCP server manually instead:
+
 [![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en/install-mcp?name=glide&config=eyJ1cmwiOiJodHRwczovL21jcC5nbGlkZWFwcHMuZGV2L21jcCJ9)
 
 Or add to `~/.cursor/mcp.json`:
@@ -46,13 +52,12 @@ Or add to `~/.cursor/mcp.json`:
 {
   "mcpServers": {
     "glide": {
+      "type": "http",
       "url": "https://mcp.glideapps.dev/mcp"
     }
   }
 }
 ```
-
-This repository is also packaged as an [Agent Plugin](https://agent-plugins.org) (`plugin.json` + `mcp.json`), the format behind [Cursor's plugin directory](https://cursor.directory/plugins).
 
 ### VS Code
 
@@ -74,11 +79,27 @@ Then restart Gemini CLI.
 
 In **Settings → Connectors**, add a custom connector with the URL `https://mcp.glideapps.dev/mcp` (requires a ChatGPT plan with connector support).
 
+## Repository layout
+
+This repo packages the same MCP server for several agent ecosystems:
+
+| Path | Format | Used by |
+| --- | --- | --- |
+| `.cursor-plugin/marketplace.json`, `plugins/glide/` | Cursor plugin | Cursor Marketplace |
+| `plugin.json`, `mcp.json` | [Agent Plugin](https://agent-plugins.org) | Agent Plugin clients |
+| `gemini-extension.json`, `GEMINI.md` | Gemini CLI extension | Gemini CLI |
+
+Validate the Cursor plugin manifests with:
+
+```bash
+node scripts/validate-template.mjs
+```
+
 ## Support
 
 - Glide documentation: https://www.glideapps.com/docs
 - Product questions and account help: https://www.glideapps.com/support
-- Bugs in the Gemini CLI extension or Agent Plugin manifests, or errors in this README: open an issue on this repository
+- Bugs in the Cursor plugin, Gemini CLI extension, or Agent Plugin manifests, or errors in this README: open an issue on this repository
 
 ## License
 

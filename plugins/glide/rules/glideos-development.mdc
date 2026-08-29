@@ -1,0 +1,26 @@
+---
+description: Conventions for building and operating GlideOS apps, data, and workflows through the Glide MCP server.
+alwaysApply: false
+---
+
+# Working with Glide
+
+These conventions apply when using the `glide` MCP server tools.
+
+## Before writing app code
+
+Read the app-building contract resource at `glideos://guidance/app-building-contract` before writing or modifying GlideOS application code. It is the canonical contract for how GlideOS apps are structured and must be followed.
+
+Additional in-depth GlideOS skills and capability guidance are available as MCP resources on this server. Read the relevant resources before doing work they govern.
+
+## Projects
+
+Most tools operate on a project. If the user has not identified a project, list their projects first and confirm which one to work in before making changes.
+
+## Authentication
+
+Signing in happens through Glide's OAuth flow the first time a tool is used. The connected user's organization determines which projects and data are accessible.
+
+## Destructive operations
+
+Deleting apps, dropping tables, restoring backups, and rolling back releases affect live user data. Confirm the target and the intent with the user before running them.
