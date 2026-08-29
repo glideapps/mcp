@@ -50,6 +50,10 @@ Ask Cursor things like:
 - Glide MCP setup: https://www.glideapps.com/docs/os/mcp
 - Glide documentation: https://www.glideapps.com/docs
 
+## Logo
+
+Glide's official symbol (`assets/logo.svg`): the white mark on the round black badge.
+
 ## License
 
 MIT
