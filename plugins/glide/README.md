@@ -1,16 +1,22 @@
 # Glide
 
-Cursor plugin that connects agents to [Glide](https://www.glideapps.com)'s official [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Plugin that connects agents to [Glide](https://www.glideapps.com)'s official [Model Context Protocol](https://modelcontextprotocol.io/) server. Packaged for both Cursor (`.cursor-plugin/plugin.json`, `mcp.json`, `rules/`) and Grok Build (`.grok-plugin/plugin.json`, `.mcp.json`, `skills/`).
 
 Build and operate GlideOS applications: create and manage projects, query and modify app databases, run workflows, publish apps, and more.
 
 ## Install
+
+### Cursor
 
 1. Open **Cursor Settings → Plugins**.
 2. Search for **Glide**.
 3. Click **Install**, then complete the Glide sign-in prompt.
 
 Or run `/add-plugin glide` in chat.
+
+### Grok Build
+
+Install **Glide** from Grok Build's plugin marketplace ([`xai-org/plugin-marketplace`](https://github.com/xai-org/plugin-marketplace)), then complete the Glide sign-in prompt.
 
 ## MCP
 
@@ -25,7 +31,7 @@ Or run `/add-plugin glide` in chat.
 }
 ```
 
-Auth is OAuth 2.1 against Glide. Cursor prompts for Glide sign-in when the plugin connects — there are no API keys to manage. Access requires a [Glide plan](https://www.glideapps.com/pricing) that includes the MCP server feature.
+Auth is OAuth 2.1 against Glide. The client prompts for Glide sign-in when the plugin connects — there are no API keys to manage. Access requires a [Glide plan](https://www.glideapps.com/pricing) that includes the MCP server feature.
 
 ## What you can do
 
@@ -35,15 +41,15 @@ Auth is OAuth 2.1 against Glide. Cursor prompts for Glide sign-in when the plugi
 - **Workflows** — run workflows, manage schedules, webhooks, and triggers
 - **Files & code** — read, write, and search project files; run backend code
 
-Ask Cursor things like:
+Ask your agent things like:
 
 > "List my Glide projects"
 >
 > "Show me the tables in my app's database"
 
-## Rules
+## Rules and skills
 
-- `glideos-development` — points the agent at the GlideOS app-building contract, project selection, and confirmation before destructive operations.
+- `rules/glideos-development.mdc` (Cursor) and `skills/glideos-development/SKILL.md` (Grok Build) — same guidance in each client's format: points the agent at the GlideOS app-building contract, project selection, and confirmation before destructive operations.
 
 ## Docs
 

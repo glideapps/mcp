@@ -2,6 +2,11 @@
 
 All notable changes to this plugin will be documented here.
 
+## 1.1.0
+
+- Packaged the plugin for Grok Build as well as Cursor: added `.grok-plugin/plugin.json` and `.mcp.json`.
+- Added a `glideos-development` skill mirroring the Cursor rule, for clients that load `skills/` instead of `rules/`.
+
 ## 1.0.0 — initial release
 
 - Logo: Glide's official symbol, the white mark on the round black badge.
