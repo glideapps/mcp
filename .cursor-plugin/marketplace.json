@@ -1,0 +1,20 @@
+{
+  "name": "glide",
+  "owner": {
+    "name": "Glide",
+    "email": "cait@heyglide.com"
+  },
+  "metadata": {
+    "description": "Glide's official plugins for AI coding agents"
+  },
+  "plugins": [
+    {
+      "name": "glide",
+      "source": "plugins/glide",
+      "description": "Build, manage, and operate GlideOS apps, data, and workflows.",
+      "minClientVersions": {
+        "cursor": "3.13.0"
+      }
+    }
+  ]
+}
