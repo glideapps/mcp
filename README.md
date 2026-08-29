@@ -88,6 +88,7 @@ This repo packages the same MCP server for several agent ecosystems:
 | `.cursor-plugin/marketplace.json`, `plugins/glide/` | Cursor plugin | Cursor Marketplace |
 | `plugin.json`, `mcp.json` | [Agent Plugin](https://agent-plugins.org) | Agent Plugin clients |
 | `gemini-extension.json`, `GEMINI.md` | Gemini CLI extension | Gemini CLI |
+| `docker-mcp-registry/` | [Docker MCP Registry](https://github.com/docker/mcp-registry) entry | Docker MCP Catalog, Docker Desktop MCP Toolkit |
 
 Validate the Cursor plugin manifests with:
 
