@@ -59,6 +59,10 @@ Or add to `~/.cursor/mcp.json`:
 }
 ```
 
+### Grok Build
+
+The [`plugins/glide`](plugins/glide) directory doubles as a Grok Build plugin: `.grok-plugin/plugin.json`, `.mcp.json`, and a `glideos-development` skill. Install it from Grok Build's plugin marketplace once the catalog entry is merged — see [Listing in the xAI plugin marketplace](#listing-in-the-xai-plugin-marketplace).
+
 ### VS Code
 
 ```bash
@@ -87,6 +91,7 @@ This repo packages the same MCP server for several agent ecosystems:
 | --- | --- | --- |
 | `.cursor-plugin/marketplace.json`, `plugins/glide/` | Cursor plugin | Cursor Marketplace |
 | `plugin.json`, `mcp.json` | [Agent Plugin](https://agent-plugins.org) | Agent Plugin clients |
+| `plugins/glide/.grok-plugin/plugin.json`, `plugins/glide/.mcp.json` | Grok Build plugin | Grok Build (xAI plugin marketplace) |
 | `gemini-extension.json`, `GEMINI.md` | Gemini CLI extension | Gemini CLI |
 
 Validate the Cursor plugin manifests with:
@@ -95,11 +100,48 @@ Validate the Cursor plugin manifests with:
 node scripts/validate-template.mjs
 ```
 
+### Listing in the xAI plugin marketplace
+
+Grok Build installs plugins from [`xai-org/plugin-marketplace`](https://github.com/xai-org/plugin-marketplace). Listing is one PR to that repo that adds a remote entry pointing at `plugins/glide` in this repo, pinned to an exact commit:
+
+```json
+{
+  "name": "glide",
+  "description": "Glide's official MCP server. Build, manage, and operate GlideOS apps: create and manage projects, query and modify app databases, run workflows, publish and roll back apps, and read, write, and search project files.",
+  "category": "development",
+  "source": {
+    "source": "url",
+    "url": "https://github.com/glideapps/mcp.git",
+    "sha": "<40-character commit SHA>",
+    "path": "plugins/glide"
+  },
+  "homepage": "https://www.glideapps.com/docs/os/mcp",
+  "keywords": ["glide", "glideos", "glide apps", "glideapps"],
+  "domains": ["glideapps.com"]
+}
+```
+
+Get the commit to pin (a full 40-character lowercase SHA — branches, tags, and short SHAs are rejected):
+
+```bash
+git ls-remote https://github.com/glideapps/mcp.git HEAD
+```
+
+Then, in a fork of the marketplace repo, add the entry to `.grok-plugin/marketplace.json` and run what CI runs before opening the PR:
+
+```bash
+python3 scripts/generate-plugin-index.py
+python3 scripts/validate-catalog.py
+python3 scripts/generate-plugin-index.py --check
+```
+
+To ship a plugin update after this repo changes, bump the pinned `sha` in that entry and regenerate the index — don't open a second entry.
+
 ## Support
 
 - Glide documentation: https://www.glideapps.com/docs
 - Product questions and account help: https://www.glideapps.com/support
-- Bugs in the Cursor plugin, Gemini CLI extension, or Agent Plugin manifests, or errors in this README: open an issue on this repository
+- Bugs in the Cursor plugin, Grok Build plugin, Gemini CLI extension, or Agent Plugin manifests, or errors in this README: open an issue on this repository
 
 ## License
 
