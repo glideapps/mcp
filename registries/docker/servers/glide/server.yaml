@@ -1,0 +1,25 @@
+name: glide
+type: remote
+dynamic:
+  tools: true
+meta:
+  category: productivity
+  tags:
+    - glide
+    - glideos
+    - app-development
+    - no-code
+    - database
+    - workflows
+    - remote
+about:
+  title: Glide
+  description: Build, manage, and operate GlideOS apps, data, and workflows
+  icon: https://www.google.com/s2/favicons?domain=glideapps.com&sz=64
+remote:
+  transport_type: streamable-http
+  url: https://mcp.glideapps.dev/mcp
+oauth:
+  - provider: glide
+    secret: glide.personal_access_token
+    env: GLIDE_PERSONAL_ACCESS_TOKEN

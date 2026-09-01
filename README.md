@@ -63,6 +63,17 @@ Or add to `~/.cursor/mcp.json`:
 
 The [`plugins/glide`](plugins/glide) directory doubles as a Grok Build plugin: `.grok-plugin/plugin.json`, `.mcp.json`, and a `glideos-development` skill. Install it from Grok Build's plugin marketplace once the catalog entry is merged — see [Listing in the xAI plugin marketplace](#listing-in-the-xai-plugin-marketplace).
 
+### Docker Desktop (MCP Toolkit)
+
+Glide is submitted to the [Docker MCP Catalog](https://hub.docker.com/mcp) as a remote server. Once the catalog entry is merged, enable it from **Docker Desktop → MCP Toolkit → Catalog**, search for **Glide**, and click **+**. Then authorize it:
+
+```bash
+docker mcp server enable glide
+docker mcp oauth authorize glide
+```
+
+The submission files live in [`registries/docker/servers/glide`](registries/docker/servers/glide) — see [Listing in the Docker MCP Catalog](#listing-in-the-docker-mcp-catalog).
+
 ### VS Code
 
 ```bash
@@ -93,6 +104,7 @@ This repo packages the same MCP server for several agent ecosystems:
 | `plugin.json`, `mcp.json` | [Agent Plugin](https://agent-plugins.org) | Agent Plugin clients |
 | `plugins/glide/.grok-plugin/plugin.json`, `plugins/glide/.mcp.json` | Grok Build plugin | Grok Build (xAI plugin marketplace) |
 | `gemini-extension.json`, `GEMINI.md` | Gemini CLI extension | Gemini CLI |
+| `registries/docker/servers/glide/` | Docker MCP Catalog entry | Docker MCP Toolkit (Docker Desktop) |
 
 Validate the Cursor plugin manifests with:
 
@@ -136,6 +148,43 @@ python3 scripts/generate-plugin-index.py --check
 ```
 
 To ship a plugin update after this repo changes, bump the pinned `sha` in that entry and regenerate the index — don't open a second entry.
+
+### Listing in the Docker MCP Catalog
+
+Docker's MCP Toolkit installs servers from [`docker/mcp-registry`](https://github.com/docker/mcp-registry). Listing is one PR to that repo that adds a `servers/glide/` entry. Glide is a **remote** server, so the entry needs no Docker image — just three files, staged in this repo under [`registries/docker/servers/glide`](registries/docker/servers/glide):
+
+| File | Contents |
+| --- | --- |
+| `server.yaml` | `type: remote`, the streamable-HTTP endpoint, and the OAuth provider block |
+| `tools.json` | `[]` — remote servers use dynamic tool discovery |
+| `readme.md` | A link to the Glide MCP documentation |
+
+`dynamic.tools: true` is required for any entry with an `oauth` block, which is why `tools.json` stays empty.
+
+To submit, copy the staged directory into a fork of the registry and run what CI runs:
+
+```bash
+git clone https://github.com/<your-fork>/mcp-registry.git
+cp -r registries/docker/servers/glide /path/to/mcp-registry/servers/glide
+
+cd /path/to/mcp-registry
+task validate -- --name glide
+task catalog -- glide
+```
+
+Optionally verify end to end against Docker Desktop before opening the PR:
+
+```bash
+docker mcp catalog import $PWD/catalogs/glide/catalog.yaml
+docker mcp server enable glide
+docker mcp oauth authorize glide
+docker mcp gateway run
+docker mcp catalog reset   # when done
+```
+
+Then open the PR using the registry's `.github/PULL_REQUEST_TEMPLATE.md`. Reviewers need a working Glide account to test the OAuth flow, since the MCP server requires a [Glide plan](https://www.glideapps.com/pricing) that includes it — share test credentials through the [form linked in the template](https://forms.gle/6Lw3nsvu2d6nFg8e6) rather than in the PR.
+
+To ship a change after this repo updates, edit the staged files here and open a follow-up PR to the registry with the same `servers/glide/` path — don't add a second entry.
 
 ## Support
 
