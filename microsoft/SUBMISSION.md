@@ -7,7 +7,7 @@ Microsoft certifies MCP servers through the **Power Platform connector certifica
 | File | Purpose |
 | --- | --- |
 | `apiDefinition.swagger.json` | OpenAPI 2.0 definition. For an MCP server this is a single `InvokeServer` operation tagged `x-ms-agentic-protocol: mcp-streamable-1.0`; Copilot Studio discovers the tools from the server at runtime. |
-| `apiProperties.json` | Connection parameters (OAuth), publisher, and icon brand color. |
+| `apiProperties.json` | Connection parameters (OAuth), publisher, and `iconBrandColor` — the tile background behind `icon.png` in the Copilot Studio and Power Automate connector pickers. Set to white so the round badge shows as-is. |
 | `intro.md` | Public documentation. Microsoft generates the connector's reference page from it. |
 | `icon.png` | 512×512 PNG of Glide's logo, rasterized from `plugins/glide/assets/logo.svg`. |
 
@@ -36,7 +36,7 @@ The connector authenticates with Glide's own OAuth server. Microsoft's connector
 
 - [x] Privacy policy URL in `apiDefinition.swagger.json` → `x-ms-connector-metadata` is `https://www.glideapps.com/legal/privacy`.
 - [x] Support contact in `info.contact` is `support@glideapps.com`.
-- [ ] Confirm `Categories`. Microsoft's allowed values include `AI`, `Productivity`, `Data`, `Collaboration`, `IT Operations`, and `Business Management`; use one or two, separated by `;`.
+- [x] `Categories` is `Productivity;AI`.
 - [ ] Review `intro.md`. The tool list was captured from the live server on 2026-09-15; re-check it against `tools/list` on `mcp.glideapps.dev` before submitting, and again on every resubmission.
 
 ### 3. Test account (support)
