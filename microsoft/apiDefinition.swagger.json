@@ -7,7 +7,7 @@
     "contact": {
       "name": "Glide Support",
       "url": "https://www.glideapps.com/support",
-      "email": "cait@heyglide.com"
+      "email": "support@glideapps.com"
     }
   },
   "host": "mcp.glideapps.dev",
@@ -98,7 +98,7 @@
     },
     {
       "propertyName": "Privacy policy",
-      "propertyValue": "REPLACE_WITH_GLIDE_PRIVACY_POLICY_URL"
+      "propertyValue": "https://www.glideapps.com/legal/privacy"
     },
     {
       "propertyName": "Categories",

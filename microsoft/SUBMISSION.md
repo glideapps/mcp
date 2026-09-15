@@ -34,8 +34,8 @@ The connector authenticates with Glide's own OAuth server. Microsoft's connector
 
 ### 2. Metadata (product / marketing)
 
-- [ ] Privacy policy URL in `apiDefinition.swagger.json` → `x-ms-connector-metadata`.
-- [ ] Confirm the support contact in `info.contact` (currently the plugin owner's email; a shared support address is better for a public listing).
+- [x] Privacy policy URL in `apiDefinition.swagger.json` → `x-ms-connector-metadata` is `https://www.glideapps.com/legal/privacy`.
+- [x] Support contact in `info.contact` is `support@glideapps.com`.
 - [ ] Confirm `Categories`. Microsoft's allowed values include `AI`, `Productivity`, `Data`, `Collaboration`, `IT Operations`, and `Business Management`; use one or two, separated by `;`.
 - [ ] Review `intro.md`. The tool list was captured from the live server on 2026-09-15; re-check it against `tools/list` on `mcp.glideapps.dev` before submitting, and again on every resubmission.
 
