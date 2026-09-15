@@ -83,6 +83,10 @@ Then restart Gemini CLI.
 
 In **Settings → Connectors**, add a custom connector with the URL `https://mcp.glideapps.dev/mcp` (requires a ChatGPT plan with connector support).
 
+### Microsoft Copilot
+
+Once certified, the Glide connector appears in the Microsoft Copilot Studio connector gallery: open your agent, go to **Tools**, search for **Glide**, and sign in with your Glide account. The connector package Microsoft certifies lives in [`microsoft/`](microsoft) — see [`microsoft/SUBMISSION.md`](microsoft/SUBMISSION.md) for how it is submitted.
+
 ## Repository layout
 
 This repo packages the same MCP server for several agent ecosystems:
@@ -93,11 +97,18 @@ This repo packages the same MCP server for several agent ecosystems:
 | `plugin.json`, `mcp.json` | [Agent Plugin](https://agent-plugins.org) | Agent Plugin clients |
 | `plugins/glide/.grok-plugin/plugin.json`, `plugins/glide/.mcp.json` | Grok Build plugin | Grok Build (xAI plugin marketplace) |
 | `gemini-extension.json`, `GEMINI.md` | Gemini CLI extension | Gemini CLI |
+| `microsoft/` | [Power Platform connector](https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-server-certification) | Microsoft Copilot Studio and Microsoft 365 Copilot |
 
 Validate the Cursor plugin manifests with:
 
 ```bash
 node scripts/validate-template.mjs
+```
+
+Validate the Microsoft connector package with:
+
+```bash
+node scripts/validate-microsoft.mjs
 ```
 
 ### Listing in the xAI plugin marketplace
@@ -141,7 +152,7 @@ To ship a plugin update after this repo changes, bump the pinned `sha` in that e
 
 - Glide documentation: https://www.glideapps.com/docs
 - Product questions and account help: https://www.glideapps.com/support
-- Bugs in the Cursor plugin, Grok Build plugin, Gemini CLI extension, or Agent Plugin manifests, or errors in this README: open an issue on this repository
+- Bugs in the Cursor plugin, Grok Build plugin, Gemini CLI extension, Microsoft connector package, or Agent Plugin manifests, or errors in this README: open an issue on this repository
 
 ## License
 

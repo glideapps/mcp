@@ -1,0 +1,108 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Glide",
+    "description": "Glide's official MCP server. Build, manage, and operate GlideOS apps, data, and workflows from Microsoft Copilot: create and manage projects, query and modify app databases, run workflows, publish and roll back apps, and read, write, and search project files.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Glide Support",
+      "url": "https://www.glideapps.com/support",
+      "email": "cait@heyglide.com"
+    }
+  },
+  "host": "mcp.glideapps.dev",
+  "basePath": "/",
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json", "text/event-stream"],
+  "paths": {
+    "/mcp": {
+      "post": {
+        "operationId": "InvokeServer",
+        "summary": "Glide MCP",
+        "description": "Sends a JSON-RPC 2.0 message to the Glide MCP server over Streamable HTTP. Microsoft Copilot Studio handles MCP session and protocol negotiation; this operation is not intended to be called directly by makers.",
+        "x-ms-agentic-protocol": "mcp-streamable-1.0",
+        "x-ms-visibility": "advanced",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "application/json, text/event-stream",
+            "x-ms-visibility": "internal"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "MCP Streamable HTTP response."
+          },
+          "401": {
+            "description": "Unauthorized — the OAuth token is missing, expired, or invalid.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden — the signed-in Glide account's plan does not include the MCP server feature, or the account lacks permission for the requested resource.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error from the Glide MCP server.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string",
+          "description": "Error message returned by the Glide MCP server."
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "oauth2_auth": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "authorizationUrl": "REPLACE_WITH_GLIDE_AUTHORIZATION_URL",
+      "tokenUrl": "REPLACE_WITH_GLIDE_TOKEN_URL",
+      "scopes": {
+        "REPLACE_WITH_GLIDE_SCOPE": "Access GlideOS projects, apps, data, and workflows on behalf of the signed-in user"
+      }
+    }
+  },
+  "security": [
+    {
+      "oauth2_auth": ["REPLACE_WITH_GLIDE_SCOPE"]
+    }
+  ],
+  "tags": [
+    {
+      "name": "Glide MCP"
+    }
+  ],
+  "x-ms-connector-metadata": [
+    {
+      "propertyName": "Website",
+      "propertyValue": "https://www.glideapps.com"
+    },
+    {
+      "propertyName": "Privacy policy",
+      "propertyValue": "REPLACE_WITH_GLIDE_PRIVACY_POLICY_URL"
+    },
+    {
+      "propertyName": "Categories",
+      "propertyValue": "Productivity;AI"
+    }
+  ]
+}
