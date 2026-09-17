@@ -34,7 +34,7 @@ Verified against Microsoft's docs on 2026-09-17: [Publish agents for Microsoft 3
 
 **Manifest schema is v1.29, not v1.27.** The agent-connectors article shows v1.27, but the published JSON schemas for v1.27 and v1.28 make `mcpToolDescription` a required property of `remoteMcpServer`, which means those versions cannot express dynamic tool discovery for a connector. v1.29 makes it optional and its description matches the article ("omit it for dynamic discovery"). Microsoft's [dynamic tool discovery article](https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/plugin-dynamic-tool-discovery) says the same: agent connectors need app manifest 1.29 or later for dynamic discovery. `node scripts/validate-m365.mjs` fails if the version drops below 1.29 without pinned tools. If Partner Center rejects 1.29 for any reason, the fallback is v1.27 with a `toolDescription.json` captured from the server's `tools/list` and referenced from `mcpToolDescription.file`, at the cost of resubmitting whenever tools change.
 
-**Dynamic client registration is the intended auth, pending one check.** Microsoft supports RFC 7591 dynamic client registration for MCP plugins and connectors, with two conditions: Glide's authorization server must publish a `registration_endpoint` in its metadata, and it must issue a `client_secret` at registration (Microsoft does not support secret-less DCR yet). The check is in [1. OAuth](#1-oauth-engineering) below. If Glide's server does not meet both conditions, switch to static OAuth: register a client for Microsoft with redirect URL `https://teams.microsoft.com/api/platform/v1.0/oAuthRedirect`, create an OAuth auth config in the Teams Developer Portal, and set `authorization.type` to `OAuthPluginVault` in `manifest.json`. `ai-plugin.json` already uses `OAuthPluginVault`; only the auth config id changes.
+**Dynamic client registration is confirmed.** Checked on 2026-09-17 against the live metadata: `https://mcp.glideapps.dev/.well-known/oauth-protected-resource/mcp` names `https://mcp.glideapps.dev` as the authorization server, and `https://mcp.glideapps.dev/.well-known/oauth-authorization-server` publishes `registration_endpoint` (`https://mcp.glideapps.dev/register`), grant types `authorization_code` and `refresh_token`, PKCE `S256`, and token endpoint auth methods `client_secret_basic`, `client_secret_post`, and `none`. Scopes are `mcp:tools`, `openid`, and `email`. Microsoft's remaining requirement is that registration returns a `client_secret`; Agents Toolkit performs the registration in step 1 below and fails visibly if it does not. Should that ever happen, the fallback is static OAuth: register a client for Microsoft with redirect URL `https://teams.microsoft.com/api/platform/v1.0/oAuthRedirect`, create an OAuth auth config in the Teams Developer Portal, and set `authorization.type` to `OAuthPluginVault` in `manifest.json`. `ai-plugin.json` already uses `OAuthPluginVault`; only the auth config id changes.
 
 ## Before you submit
 
@@ -49,21 +49,7 @@ It fails on structural problems and warns about every `REPLACE_WITH_…` placeho
 
 ### 1. OAuth (engineering)
 
-- [ ] Confirm dynamic client registration from a machine with access to `mcp.glideapps.dev`:
-
-  ```bash
-  curl -s https://mcp.glideapps.dev/.well-known/oauth-protected-resource/mcp
-  curl -s https://mcp.glideapps.dev/.well-known/oauth-authorization-server
-  ```
-
-  The first response names the authorization server. The second must contain `registration_endpoint`. Then confirm a registration returns a `client_secret`:
-
-  ```bash
-  curl -s -X POST "<registration_endpoint>" -H 'content-type: application/json' \
-    -d '{"client_name":"probe","redirect_uris":["https://teams.microsoft.com/api/platform/v1.0/oAuthRedirect"],"grant_types":["authorization_code","refresh_token"],"token_endpoint_auth_method":"client_secret_post"}'
-  ```
-
-  If `registration_endpoint` is missing, or the response has no `client_secret`, use static OAuth instead (see the decision above).
+- [x] Dynamic client registration confirmed from the server's metadata (see above).
 - [ ] Create the auth config. The Teams Developer Portal does not support DCR yet, so use **Microsoft 365 Agents Toolkit** (6.12.0 or later) in Visual Studio Code: **Create a New Agent/App** → **Declarative Agent** → **Add an Action** → **Start with an MCP Server** → enter `https://mcp.glideapps.dev/mcp` → **OAuth (with dynamic registration)**. The toolkit registers the client, stores the auth config in the Microsoft Enterprise token store, and writes the id into the generated `ai-plugin.json`.
 - [ ] Copy that auth config id into both `REPLACE_WITH_DCR_AUTH_CONFIG_ID` placeholders (`manifest.json` → `agentConnectors[0]…authorization.referenceId` and `ai-plugin.json` → `runtimes[0].auth.reference_id`). If Microsoft issues separate ids for the connector and the plugin, use each where it belongs; the checker only warns when they differ.
 - [ ] Sideload the zip into a test tenant (Agents Toolkit **Provision**, or Teams admin center → upload a custom app) and run every conversation starter in `declarativeAgent.json`. All of them must return a real answer; Microsoft checks each one.
