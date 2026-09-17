@@ -1,6 +1,18 @@
 # Submitting the Glide MCP server to Microsoft Copilot
 
-Internal guide for listing the Glide MCP server in Microsoft's connector catalog, so it appears in Microsoft Copilot Studio and Microsoft 365 Copilot. The public-facing documentation is [`intro.md`](intro.md); this file is for whoever runs the submission.
+Internal guide for listing the Glide MCP server as a **certified Copilot Studio connector**. The public-facing documentation is [`intro.md`](intro.md); this file is for whoever runs the submission.
+
+## Which Microsoft program this is
+
+Microsoft has three separate ways to put an MCP server in front of Copilot users. This directory is for the first one only.
+
+| Program | Where Glide appears | How to submit | Status |
+| --- | --- | --- | --- |
+| **Copilot Studio connector** (this package) | Tool picker in Copilot Studio, Power Automate, and Power Apps — for people building agents and automations | Partner Center → **New offer** → **Microsoft Copilot Studio Connector or Agent** | This directory |
+| Microsoft 365 Copilot app or agent | Agent store inside Microsoft 365 Copilot and Teams — for end users | Partner Center → **New offer** → **Microsoft 365 and Copilot App or Agent**, with a Microsoft 365 app manifest that registers the server as an [agent connector](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/agent-connectors) | Separate package, tracked separately |
+| Federated Copilot connector | "Sources" list in Copilot Chat, Excel, and Researcher; read-only tools only | [Microsoft Form](https://aka.ms/FccSubmissionForm); requires a Microsoft business-development engagement and a signed agreement first — see [Submit a federated connector](https://learn.microsoft.com/en-us/microsoft-365/copilot/connectors/submit-federated-connector) | Handled outside this repo |
+
+All three point at the same endpoint, `https://mcp.glideapps.dev/mcp`, and do not conflict.
 
 Microsoft certifies MCP servers through the **Power Platform connector certification program**. The server itself does not change — this directory is the connector package that describes it in Microsoft's format:
 
@@ -55,11 +67,11 @@ Microsoft manually exercises **every tool** with credentials you supply, and the
 
 ## Submitting
 
-Two ways to create the offer. Either way, choose the **Connectors and Agents for Microsoft Copilot Studio** offer type — MCP servers are certified through the same pipeline as connectors.
+Two ways to create the offer. Either way, choose the **Microsoft Copilot Studio Connector or Agent** offer type (the certification doc calls it "Connectors and Agents for Microsoft Copilot Studio"; the Partner Center tile reads "Microsoft Copilot Studio Connector or Agent") — MCP servers are certified through the same pipeline as connectors.
 
 ### Option A — Partner Center UI
 
-1. Go to [Partner Center](https://partner.microsoft.com/dashboard/home) → **Marketplace offers** → **New offer** → **Connectors and Agents for Microsoft Copilot Studio**.
+1. Go to [Partner Center](https://partner.microsoft.com/dashboard/home) → **Marketplace offers** → **New offer** → **Microsoft 365** tab → **Microsoft Copilot Studio Connector or Agent**.
 2. Fill in the offer's metadata, legal and support links, and logos.
 3. Upload this directory's four files as the connector package.
 4. Enter the OAuth client secret and the reviewer test credentials where prompted.
