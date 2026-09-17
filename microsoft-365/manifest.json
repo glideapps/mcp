@@ -44,7 +44,7 @@
           "mcpServerUrl": "https://mcp.glideapps.dev/mcp",
           "authorization": {
             "type": "DynamicClientRegistration",
-            "referenceId": "REPLACE_WITH_DCR_AUTH_CONFIG_ID"
+            "referenceId": "OTZhZjRiNTMtMjljYS00NjMxLTgyYzQtYzgzYjMyMzA3YzNlIyMzYTI0YWNlYi03ZDljLTQ5NzQtODlmMC05YTQ1NTM1NjVjZDQ="
           }
         }
       }

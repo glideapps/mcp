@@ -29,7 +29,7 @@
       "type": "RemoteMCPServer",
       "auth": {
         "type": "OAuthPluginVault",
-        "reference_id": "REPLACE_WITH_DCR_AUTH_CONFIG_ID"
+        "reference_id": "OTZhZjRiNTMtMjljYS00NjMxLTgyYzQtYzgzYjMyMzA3YzNlIyMzYTI0YWNlYi03ZDljLTQ5NzQtODlmMC05YTQ1NTM1NjVjZDQ="
       },
       "spec": {
         "url": "https://mcp.glideapps.dev/mcp"
