@@ -1,0 +1,43 @@
+{
+  "properties": {
+    "connectionParameters": {
+      "token": {
+        "type": "oauthSetting",
+        "oAuthSettings": {
+          "identityProvider": "oauth2",
+          "clientId": "REPLACE_WITH_GLIDE_CLIENT_ID",
+          "scopes": ["REPLACE_WITH_GLIDE_SCOPE"],
+          "redirectMode": "Global",
+          "redirectUrl": "https://global.consent.azure-apim.net/redirect",
+          "properties": {
+            "IsFirstParty": "False",
+            "IsOnbehalfofLoginSupported": false
+          },
+          "customParameters": {
+            "authorizationUrl": {
+              "value": "REPLACE_WITH_GLIDE_AUTHORIZATION_URL"
+            },
+            "tokenUrl": {
+              "value": "REPLACE_WITH_GLIDE_TOKEN_URL"
+            },
+            "refreshUrl": {
+              "value": "REPLACE_WITH_GLIDE_TOKEN_URL"
+            }
+          }
+        },
+        "uiDefinition": {
+          "displayName": "Sign in with Glide",
+          "description": "Sign in with your Glide account. Access requires a Glide plan that includes the MCP server feature.",
+          "constraints": {
+            "required": "true",
+            "hidden": "false"
+          }
+        }
+      }
+    },
+    "iconBrandColor": "#FFFFFF",
+    "capabilities": [],
+    "publisher": "Glide",
+    "stackOwner": "Glide"
+  }
+}
