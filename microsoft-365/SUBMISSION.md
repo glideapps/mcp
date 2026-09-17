@@ -36,6 +36,18 @@ Verified against Microsoft's docs on 2026-09-17: [Publish agents for Microsoft 3
 
 **Dynamic client registration is confirmed.** Checked on 2026-09-17 against the live metadata: `https://mcp.glideapps.dev/.well-known/oauth-protected-resource/mcp` names `https://mcp.glideapps.dev` as the authorization server, and `https://mcp.glideapps.dev/.well-known/oauth-authorization-server` publishes `registration_endpoint` (`https://mcp.glideapps.dev/register`), grant types `authorization_code` and `refresh_token`, PKCE `S256`, and token endpoint auth methods `client_secret_basic`, `client_secret_post`, and `none`. Scopes are `mcp:tools`, `openid`, and `email`. Microsoft's remaining requirement is that registration returns a `client_secret`; Agents Toolkit performs the registration in step 1 below and fails visibly if it does not. Should that ever happen, the fallback is static OAuth: register a client for Microsoft with redirect URL `https://teams.microsoft.com/api/platform/v1.0/oAuthRedirect`, create an OAuth auth config in the Teams Developer Portal, and set `authorization.type` to `OAuthPluginVault` in `manifest.json`. `ai-plugin.json` already uses `OAuthPluginVault`; only the auth config id changes.
 
+### Test results so far (2026-09-17, tenant glideos.onmicrosoft.com)
+
+A throwaway Agents Toolkit project with the same plugin shape was provisioned and tested in Microsoft 365 Copilot Chat (account without a Copilot license; custom app upload enabled). Findings:
+
+- Provisioning passed every step, including `dcr/register` against `https://mcp.glideapps.dev/register` (registration returns a `client_secret`).
+- **Dynamic tool discovery did not surface any tools.** With `functions: []` and `run_for_functions: ["*"]`, the agent reported it had no tools and never showed a sign-in card. Anonymous `initialize` and `tools/list` on the server return 401 with a correct `WWW-Authenticate` challenge, which is the expected MCP behavior, so this is either a Copilot Chat limitation for unlicensed accounts or a platform-side discovery issue. Not yet resolved.
+- **Pinned tools do trigger sign-in.** With `project_list` pinned in `mcp_tool_description`, Copilot showed the sign-in card and redirected to Glide's authorize page. Sign-in at Glide succeeded.
+- **The token exchange then failed on Microsoft's redirect page** (`Something went wrong. Please try again.`, RequestId `RoutingAdded-84963fe0-b8fa-4bcf-867a-45a1b677e873`, 2026-09-17T19:50:02Z). The failure is between Microsoft's token store and Glide's `/token` endpoint. Open item for the server owner: find the token request from the client the toolkit registered at about 19:16Z on 2026-09-17 and report which OAuth error the server returned. Known RFC 7591 deviations that may matter: `registration_client_uri` is returned as a relative path, and the requested `scope` is not echoed in the registration response.
+- A diagnostic client named `m365-diagnostic` (`client_id` `lsM7QVFNQ64113CP`) was registered during troubleshooting and never used; revoke it if registrations are tracked.
+
+Until both items are resolved, the fallback for submission is pinned tools: capture `tools/list` from the server into `toolDescription.json`, reference it from `mcpToolDescription.file` in `manifest.json` and `mcp_tool_description.file` in `ai-plugin.json`, and list the pinned tools in `functions` and `run_for_functions`. The checker currently rejects that shape on purpose; relax it when the decision is made.
+
 ## Before you submit
 
 Run the offline checker after every edit:
