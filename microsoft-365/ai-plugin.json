@@ -1,0 +1,40 @@
+{
+  "schema_version": "v2.4",
+  "name_for_human": "Glide",
+  "namespace": "glide",
+  "description_for_human": "Build, manage, and operate GlideOS apps, data, and workflows.",
+  "description_for_model": "Glide's official MCP server for GlideOS. Use it whenever the user asks about, or wants to change, anything in their Glide workspace: projects, apps and their versions, app databases and tables, project files, workflows and their runs, schedules, webhooks, app triggers, integrations and event triggers, debug logs, AI usage, secrets (names only), backups, and the audit log. Tools are discovered from the server at runtime. Every tool runs as the signed-in Glide user within their organization and role. Identify the project first (project_search or project_list), prefer read-only tools for questions, and get the user's confirmation before any tool that changes or deletes data. Tools marked as requiring confirmation refuse to run until a human explicitly approves that specific call. Most mutating tools accept dryRun: true and return a plan instead of executing.",
+  "contact_email": "support@glideapps.com",
+  "legal_info_url": "https://www.glideapps.com/legal/terms",
+  "privacy_policy_url": "https://www.glideapps.com/legal/privacy",
+  "capabilities": {
+    "conversation_starters": [
+      {
+        "title": "List my projects",
+        "text": "List my Glide projects and tell me which ones have a published app."
+      },
+      {
+        "title": "Explore a database",
+        "text": "Show me the tables in the database of my most recently created project."
+      },
+      {
+        "title": "Check workflows",
+        "text": "Which workflows are enabled in my most recently created project, and when did they last run?"
+      }
+    ]
+  },
+  "functions": [],
+  "runtimes": [
+    {
+      "type": "RemoteMCPServer",
+      "auth": {
+        "type": "OAuthPluginVault",
+        "reference_id": "REPLACE_WITH_DCR_AUTH_CONFIG_ID"
+      },
+      "spec": {
+        "url": "https://mcp.glideapps.dev/mcp"
+      },
+      "run_for_functions": ["*"]
+    }
+  ]
+}

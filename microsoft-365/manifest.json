@@ -1,0 +1,53 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.29/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.29",
+  "version": "1.0.0",
+  "id": "2e30afd0-696f-4020-999c-2147f2c1f450",
+  "developer": {
+    "name": "Glide",
+    "websiteUrl": "https://www.glideapps.com",
+    "privacyUrl": "https://www.glideapps.com/legal/privacy",
+    "termsOfUseUrl": "https://www.glideapps.com/legal/terms"
+  },
+  "name": {
+    "short": "Glide",
+    "full": "Glide"
+  },
+  "description": {
+    "short": "Build, manage, and operate GlideOS apps, data, and workflows from Copilot.",
+    "full": "Glide connects Microsoft 365 Copilot to your GlideOS workspace. Ask Copilot to create and manage projects, query and modify app databases, run workflows, publish and roll back apps, and read, write, and search project files.\n\nEvery request runs as you, inside your Glide organization, with your role (admin, editor, or viewer). Copilot can only reach the projects, apps, and data you can open yourself.\n\nWhat you can do\n- Projects: list, search, create, rename, and delete projects.\n- Apps: publish, promote, and roll back versions; set who can open an app; manage vanity subdomains and custom domains; read build and runtime errors.\n- Data: list tables, run read-only queries, run SQL, load CSV, JSON, or XLSX data into a table, and create, list, and restore backups.\n- Files: read, write, edit, search, copy, move, and restore project files.\n- Workflows: run workflows on demand, inspect runs, and manage schedules, webhooks, and app triggers.\n- Integrations: find integration tools and enable event triggers that start workflows.\n- Diagnostics: query debug logs, list AI models, check AI usage, and review the audit log of tool calls.\n\nSafety\nHigh-impact tools, such as running shell scripts or backend code, destructive SQL statements, database restores, project deletion, and app access changes, refuse to run until you explicitly approve that specific call. Most tools that change data accept a dry run and return a plan instead of executing. Every file change is recorded and can be restored, database restores preserve the current state first, and secret values are never returned to the agent.\n\nRequirements\nA Glide account on a plan that includes the MCP server feature. Sign in with your Glide account when Copilot prompts you; no API keys are needed. Tools are discovered from the Glide server at runtime, so the set can grow over time."
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "accentColor": "#000000",
+  "validDomains": [
+    "mcp.glideapps.dev",
+    "www.glideapps.com"
+  ],
+  "copilotAgents": {
+    "declarativeAgents": [
+      {
+        "id": "glide",
+        "file": "declarativeAgent.json"
+      }
+    ]
+  },
+  "agentConnectors": [
+    {
+      "id": "glide-mcp",
+      "displayName": "Glide",
+      "description": "Glide's official MCP server. Provides tools to build, manage, and operate GlideOS apps, data, and workflows: create and manage projects, query and modify app databases, run workflows, publish and roll back apps, and read, write, and search project files. Tools are discovered from the server at runtime. Every call runs as the signed-in Glide user, within their organization and role, and high-impact tools require explicit human approval before they run.",
+      "toolSource": {
+        "remoteMcpServer": {
+          "mcpServerUrl": "https://mcp.glideapps.dev/mcp",
+          "authorization": {
+            "type": "DynamicClientRegistration",
+            "referenceId": "REPLACE_WITH_DCR_AUTH_CONFIG_ID"
+          }
+        }
+      }
+    }
+  ]
+}

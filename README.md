@@ -79,6 +79,10 @@ gemini extensions install https://github.com/glideapps/mcp
 
 Then restart Gemini CLI.
 
+### Microsoft 365 Copilot
+
+Once Microsoft certifies the listing, add **Glide** from the Agent Store in Microsoft 365 Copilot (or the Apps store in Teams, Outlook, Word, Excel, and PowerPoint) and sign in with your Glide account. The app package Microsoft certifies lives in [`microsoft-365/`](microsoft-365) — see [`microsoft-365/SUBMISSION.md`](microsoft-365/SUBMISSION.md) for how it is submitted.
+
 ### ChatGPT
 
 In **Settings → Connectors**, add a custom connector with the URL `https://mcp.glideapps.dev/mcp` (requires a ChatGPT plan with connector support).
@@ -93,11 +97,18 @@ This repo packages the same MCP server for several agent ecosystems:
 | `plugin.json`, `mcp.json` | [Agent Plugin](https://agent-plugins.org) | Agent Plugin clients |
 | `plugins/glide/.grok-plugin/plugin.json`, `plugins/glide/.mcp.json` | Grok Build plugin | Grok Build (xAI plugin marketplace) |
 | `gemini-extension.json`, `GEMINI.md` | Gemini CLI extension | Gemini CLI |
+| `microsoft-365/` | [Microsoft 365 app package](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/agent-connectors) (declarative agent + agent connector) | Microsoft 365 Copilot Agent Store, via Partner Center |
 
 Validate the Cursor plugin manifests with:
 
 ```bash
 node scripts/validate-template.mjs
+```
+
+Validate the Microsoft 365 app package (add `--zip` to also build the upload):
+
+```bash
+node scripts/validate-m365.mjs
 ```
 
 ### Listing in the xAI plugin marketplace
@@ -141,7 +152,7 @@ To ship a plugin update after this repo changes, bump the pinned `sha` in that e
 
 - Glide documentation: https://www.glideapps.com/docs
 - Product questions and account help: https://www.glideapps.com/support
-- Bugs in the Cursor plugin, Grok Build plugin, Gemini CLI extension, or Agent Plugin manifests, or errors in this README: open an issue on this repository
+- Bugs in the Cursor plugin, Grok Build plugin, Gemini CLI extension, Microsoft 365 app package, or Agent Plugin manifests, or errors in this README: open an issue on this repository
 
 ## License
 
