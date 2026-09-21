@@ -8,8 +8,8 @@ Several Microsoft programs have near-identical names. This package is for exactl
 
 | What you are looking at | Is it this package? | Notes |
 | --- | --- | --- |
-| Partner Center program **Microsoft 365 and Copilot** (formerly the Office Store program), offer type **Apps and agents for Microsoft 365 and Copilot** | **Yes** | Partner Center's **New offer** picker labels it "Microsoft 365 and Copilot App or Agent". You upload this directory's zip as the app package. |
-| Offer type **Microsoft Copilot Studio Connector or Agent** (Power Platform connector certification) | No | That is the sibling package in `microsoft/` on branch `claude/hopeful-newton-qid0va`. Same server, different program, different files. |
+| Partner Center program **Microsoft 365 and Copilot** (formerly the Office Store program), offer type **Apps and agents for Microsoft 365 and Copilot** | **Yes** | Verified in Partner Center on 2026-09-21: **Marketplace offers → New offer → Microsoft 365** shows four tiles, and the one to pick is **Microsoft 365 and Copilot App or Agent** ("Extend Copilot & Teams to boost AI and productivity"). You upload this directory's zip as the app package. |
+| Offer type **Microsoft Copilot Studio Connector or Agent** (Power Platform connector certification) | No | The neighbouring tile on the same picker ("Extend Copilot Studio with custom connectors"). That is the sibling package in `microsoft/` on branch `claude/hopeful-newton-qid0va`. Same server, different program, different files. |
 | Offer type **AI app or agent** (Azure Marketplace, under the Commercial Marketplace program) | No | For Azure-hosted AI apps sold through Azure Marketplace. Not for the Agent Store. |
 | **Microsoft Agent 365** submission | No | A different offer type for agents extended with Agent 365 observability. Do not bundle it with this offer (validation guideline 12). |
 | **Microsoft 365 Developer Program** | No | Gives you a sandbox tenant for testing. It is not a publishing program. |
@@ -125,7 +125,7 @@ Remaining checklist:
 
 ## Submitting
 
-1. Go to [Partner Center](https://partner.microsoft.com/dashboard/home) → **Marketplace offers** → **New offer** → **Microsoft 365** → **Microsoft 365 and Copilot App or Agent** (the docs call this offer type **Apps and agents for Microsoft 365 and Copilot**).
+1. Go to [Partner Center](https://partner.microsoft.com/dashboard) → **Marketplace offers** → **New offer**. On the **Microsoft 365** tab, pick **Microsoft 365 and Copilot App or Agent**. The other three tiles on that tab (Office add-in, SharePoint solution, Microsoft Copilot Studio Connector or Agent) are all the wrong pipeline.
 2. Upload `glide-microsoft-365.zip` as the app package. Partner Center reads the manifest and pre-fills the listing.
 3. Complete the listing (screenshots, video, category, markets) and the availability and pricing pages.
 4. Paste the test notes and reviewer credentials into the certification notes.
