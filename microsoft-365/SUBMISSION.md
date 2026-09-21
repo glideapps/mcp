@@ -81,7 +81,9 @@ Partner Center collects the store listing outside the package. The manifest's `n
 
 - [x] Privacy policy `https://www.glideapps.com/legal/privacy` and terms `https://www.glideapps.com/legal/terms` in `manifest.json` and `ai-plugin.json`.
 - [x] Support contact `support@glideapps.com` in `ai-plugin.json`.
-- [ ] Screenshots: up to five, 1366x768, under 1024 KB each. At least one must show the agent inside Microsoft 365 Copilot (validation guideline 3).
+- [x] Screenshots captured and sized 2026-09-21: seven candidates at 1366x768, all well under 1024 KB. Four show the agent inside Microsoft 365 Copilot (listing projects, reading a database, asking for confirmation before a change, and completing it) and three show the published demo app. Browser chrome and the signed-in user's name were cropped out, and one production URL naming the internal test org was masked. No product content was altered.
+- [ ] Pick five for the listing. Suggested order: the Copilot confirmation prompt leads, since validation guideline 9 grades disclosure and confirmation for actions.
+- [ ] Rename the agent before recapturing, or accept the mismatch: the screenshots show the sideloaded copy's name (`glide-m365dev`), while the listing publishes as **Glide**.
 - [ ] Optional demo video (YouTube or Vimeo link).
 - [ ] Category, markets, and pricing (the agent itself is free; access is gated by the user's Glide plan).
 - [ ] Re-read `description.full` in `manifest.json` against the live tool list before every submission. It summarizes the tools captured from `mcp.glideapps.dev` on 2026-09-15 (the same list as `microsoft/intro.md`).
