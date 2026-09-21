@@ -125,13 +125,40 @@ Remaining checklist:
 
 ## Submitting
 
-1. Go to [Partner Center](https://partner.microsoft.com/dashboard) → **Marketplace offers** → **New offer**. On the **Microsoft 365** tab, pick **Microsoft 365 and Copilot App or Agent**. The other three tiles on that tab (Office add-in, SharePoint solution, Microsoft Copilot Studio Connector or Agent) are all the wrong pipeline.
-2. Upload `glide-microsoft-365.zip` as the app package. Partner Center reads the manifest and pre-fills the listing.
-3. Complete the listing (screenshots, video, category, markets) and the availability and pricing pages.
-4. Paste the test notes and reviewer credentials into the certification notes.
-5. Submit for validation.
+Microsoft's [step-by-step submission guide](https://learn.microsoft.com/en-us/partner-center/marketplace-offers/add-in-submission-guide) governs this. Its ten steps, with our answers:
 
-Microsoft's validation team sends the report and any remediation steps by email from the Teams submission concierge. Allow at least one business day after approval for the listing to appear.
+**1. Offer type.** Partner Center → **Marketplace offers** → the **Microsoft 365 and Copilot** tab → **+ New offer** → **Microsoft 365 and Copilot App or Agent**. If that tab is missing, the account is not in the program.
+
+**2. Name and publisher.** Offer ID `glide-mcp` (permanent). The publisher must already be enrolled in the program and **cannot be changed after the offer is created**; its name must match the manifest's `developer.name`, which is **Glide**.
+
+**3. Product setup.** Four questions:
+
+| Question | Answer | Why |
+| --- | --- | --- |
+| Listed in the Apple Store? | **No**, unless Glide wants iOS acquisition | Answering yes requires an Apple Developer ID on the account. Answering no means users cannot acquire the agent on an iOS device, but can still use it there once they acquire it elsewhere. |
+| Uses Microsoft Entra ID or SSO? | **No** | The agent authenticates with Glide's own OAuth server using dynamic client registration, not Entra. |
+| Requires additional purchases? | **Yes** | Using the agent requires a paid Glide plan bought from Glide. Answering no would misrepresent the licensing and fail review when reviewers hit refused tool calls. |
+| Connect a lead management CRM? | **None** | Optional. Leads still appear in Partner Center's Referrals workspace; they just will not reach HubSpot automatically. |
+
+**4. Package.** Upload `glide-microsoft-365.zip`. Expect "Manifest checks passed" and a list of target surfaces (Office on the web and Windows, Teams, Outlook). Microsoft 365 Copilot is not listed there as a separate platform; the `copilotAgents` node is what makes this a Copilot agent.
+
+**5. Properties.** Categories: **Productivity**, **Workflow & Process Management**, **IT/admin**. Skip industries, since the agent is not industry-specific. Then legal and support:
+
+- **EULA: use Glide's own terms**, `https://www.glideapps.com/legal/glide-os/terms`, rather than Microsoft's Standard Contract. Glide licenses its service directly, so Glide's terms are what actually govern use. **This choice cannot be reversed after publishing**, so have it confirmed by whoever owns legal.
+- Privacy policy: `https://www.glideapps.com/legal/glide-os/privacy`. Microsoft requires it to describe the service rather than the website, to name the submitted app, and not to 404. A terms page does not count as a privacy policy; the two must be separate documents.
+- Support document: `https://www.glideapps.com/support`.
+
+**6. Listing languages.** The Marketplace listings page is **empty until you add a language**. Select **Manage additional languages**, choose English (United States), and select **Update**. Only then does a row appear to fill in.
+
+**7. Listing content.** Open the language row and paste the name, short description, and long description **verbatim from the manifest** — validation compares the two, and rewording is a common rejection. Add the five screenshots, leading with the confirmation prompt.
+
+**8. Availability.** Pick the date carefully: **the schedule cannot be changed after the first publish**.
+
+**9. Notes for certification.** Paste `TEST-NOTES.md` with the credentials filled in. Optionally also upload a PDF under **Additional certification info**; it can carry images and persists across later submissions. Microsoft warns that reviewers **cannot contact you for sign-in details**, and that a submission without clear instructions fails automatically, so the credentials must be in the notes themselves.
+
+**10. The five errors behind most rejections.** All covered: terms link, privacy link, testing instructions, account disclosure, and additional purchases both declared in setup and stated in the listing description (the long description ends with the plan requirement).
+
+Expect a reviewer response in three to four business days. Microsoft's own guidance is that a submission typically takes four to six weeks overall and often needs more than one round.
 
 ## What Microsoft checks
 
