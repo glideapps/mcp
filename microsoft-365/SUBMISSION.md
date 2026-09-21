@@ -104,7 +104,8 @@ The data covers every status the app can show: 3 overdue, 1 due soon, 3 checked 
 
 Remaining checklist:
 
-- [ ] Confirm the org is on a plan that includes the MCP server feature. Reviewers can sign in without it, but every tool call is refused, which reads as a broken agent.
+- [x] Plan confirmed 2026-09-21: the org is on **Pro**, active, with the MCP server feature enabled, 100 seats (none used) and its full credit allowance. Pro is the tier that includes building with your own agent.
+- [ ] Watch the renewal date. The subscription renews 2026-10-21; if it lapses mid-review, every reviewer tool call is refused and the agent reads as broken.
 - [ ] Create a reviewer account in that org and note the credentials for the submission form.
 - [ ] Refresh the seeded dates before submitting. They are anchored to 2026-09-21, so after a few weeks everything reads as overdue. Re-running `Overdue Sweep` is harmless; it records at most one reminder per checkout per day.
 - [ ] Leave **Inventory Tracker** uncreated. One conversation starter asks the agent to create a project by that name, so it has to be absent for that starter to work.
