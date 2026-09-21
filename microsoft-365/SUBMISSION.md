@@ -83,11 +83,27 @@ Partner Center collects the store listing outside the package. The manifest's `n
 
 ### 3. Test account (support)
 
-Microsoft reviewers exercise the agent with credentials you supply, and the MCP server feature is behind a paid plan.
+Microsoft's reviewers sign in and exercise the agent themselves, so they need a Glide organization with real content behind it.
 
-- [ ] A Glide organization on a plan that includes the MCP server feature, dedicated to Microsoft's reviewers.
-- [ ] At least one project with a deployed app, a database with a few tables, and a workflow, so every conversation starter has something to answer.
-- [ ] Test notes for the submission form: sign-in steps, which project to use, which tools require human confirmation and why, and which tools are safe to run destructively.
+**Reviewer org, already provisioned.** The `microsoft-copilot-testing` organization holds a demo project built for this submission:
+
+| Thing | What is there |
+| --- | --- |
+| Project | **Equipment Checkout**, an asset-lending tracker |
+| Published app | **Equipment Checkout**, published to production (overview, checkouts, and equipment screens) |
+| Tables | `equipment` (15 rows), `checkouts` (13 rows), `overdue_reminders` |
+| Views | `checkout_activity` and `equipment_availability`, both with relation comments |
+| Workflow | **Overdue Sweep**, enabled, with one completed run and a weekday 9am schedule |
+
+The data covers every status the app can show: 3 overdue, 1 due soon, 3 checked out, 5 returned, and 1 returned late. Borrower names and asset values are invented, and no real customer data is present.
+
+Remaining checklist:
+
+- [ ] Confirm the org is on a plan that includes the MCP server feature. Reviewers can sign in without it, but every tool call is refused, which reads as a broken agent.
+- [ ] Create a reviewer account in that org and note the credentials for the submission form.
+- [ ] Refresh the seeded dates before submitting. They are anchored to 2026-09-21, so after a few weeks everything reads as overdue. Re-running `Overdue Sweep` is harmless; it records at most one reminder per checkout per day.
+- [ ] Leave **Inventory Tracker** uncreated. One conversation starter asks the agent to create a project by that name, so it has to be absent for that starter to work.
+- [ ] Write the test notes: sign-in steps, which project to use, which tools require human confirmation (shell scripts, backend code, destructive SQL, database restores, project deletion, app access changes), and which tools are safe to exercise destructively.
 
 ### 4. Partner Center
 
