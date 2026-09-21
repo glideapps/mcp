@@ -83,7 +83,11 @@ Partner Center collects the store listing outside the package. The manifest's `n
 - [x] Support contact `support@glideapps.com` in `ai-plugin.json`.
 - [x] Screenshots captured and sized 2026-09-21: seven candidates at 1366x768, all well under 1024 KB. Four show the agent inside Microsoft 365 Copilot (listing projects, reading a database, asking for confirmation before a change, and completing it) and three show the published demo app. Browser chrome and the signed-in user's name were cropped out, and one production URL naming the internal test org was masked. No product content was altered.
 - [ ] Pick five for the listing. Suggested order: the Copilot confirmation prompt leads, since validation guideline 9 grades disclosure and confirmation for actions.
-- [ ] Rename the agent before recapturing, or accept the mismatch: the screenshots show the sideloaded copy's name (`glide-m365dev`), while the listing publishes as **Glide**.
+- [ ] **Recapture two Copilot screenshots under the right agent name.** The captured shots show the sideloaded copy's name (`glide-m365dev`); the listing publishes as **Glide**. Cosmetic, not a validation failure, and screenshots can be swapped later in an update (which re-runs validation). To fix it now:
+  1. In the Agents Toolkit test project, set `name.short` and `name.full` to `Glide` in `appPackage/manifest.json` (removing `${{APP_NAME_SUFFIX}}`), `name` to `Glide` in `appPackage/declarativeAgent.json`, and `name_for_human` to `Glide` in `appPackage/ai-plugin.json`.
+  2. Provision, then open a new Copilot chat.
+  3. Retake two shots: the projects answer, and the create-project prompt captured **at the confirmation step, before replying**. That second one is the strongest asset in the set, because validation guideline 9 grades disclosure and confirmation for actions.
+  4. Delete the created project afterwards so the fifth conversation starter stays runnable.
 - [ ] Optional demo video (YouTube or Vimeo link).
 - [ ] Category, markets, and pricing (the agent itself is free; access is gated by the user's Glide plan).
 - [ ] Re-read `description.full` in `manifest.json` against the live tool list before every submission. It summarizes the tools captured from `mcp.glideapps.dev` on 2026-09-15 (the same list as `microsoft/intro.md`).
