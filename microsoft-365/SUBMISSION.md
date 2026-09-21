@@ -158,7 +158,7 @@ Microsoft's [step-by-step submission guide](https://learn.microsoft.com/en-us/pa
 
 **5. Properties.** Categories: **Productivity**, **Workflow & Process Management**, **IT/admin**. Skip industries, since the agent is not industry-specific. Then legal and support:
 
-- **EULA: use Glide's own terms**, `https://www.glideapps.com/legal/glide-os/terms`, rather than Microsoft's Standard Contract. Glide licenses its service directly, so Glide's terms are what actually govern use. **This choice cannot be reversed after publishing**, so have it confirmed by whoever owns legal.
+- **EULA: Microsoft's Standard Contract** (decided 2026-09-21). The agent is free to install and does nothing without a Glide account, so the standard contract covers acquisition while Glide's own terms continue to govern the service itself. **This choice cannot be reversed after publishing.** Glide's terms are still cited in the package as the plugin's `legal_info_url`.
 - Privacy policy: `https://www.glideapps.com/legal/glide-os/privacy`. Microsoft requires it to describe the service rather than the website, to name the submitted app, and not to 404. A terms page does not count as a privacy policy; the two must be separate documents.
 - Support document: `https://www.glideapps.com/support`.
 
