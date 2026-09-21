@@ -119,7 +119,7 @@ Remaining checklist:
 ### 4. Partner Center
 
 - [ ] A Partner Center account whose **business verification** is complete. A Microsoft AI Cloud Partner Program account works; registration for this program is free.
-- [ ] Enrolled in the **Microsoft 365 and Copilot** program: Partner Center → **Settings** → **Account settings** → **Programs** → **Microsoft 365 and Copilot** → **Get started**.
+- [x] Enrolled in the **Microsoft 365 and Copilot** program. Confirmed 2026-09-21 under Partner Center → **Settings** → **Account settings** → **Programs**: registered 2026-08-27 with the program agreement accepted.
 - [ ] **Publisher verification** complete (required for apps listed in the store).
 - [ ] Whoever submits signs in with an account in the seller-associated tenant.
 
