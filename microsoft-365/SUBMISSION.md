@@ -116,6 +116,20 @@ Remaining checklist:
 - [ ] Leave **Inventory Tracker** uncreated. One conversation starter asks the agent to create a project by that name, so it has to be absent for that starter to work.
 - [ ] Write the test notes: sign-in steps, which project to use, which tools require human confirmation (shell scripts, backend code, destructive SQL, database restores, project deletion, app access changes), and which tools are safe to exercise destructively.
 
+### 3b. Links (confirmed 2026-09-21)
+
+All four URLs in the package were checked and load correctly:
+
+| URL | Used as |
+| --- | --- |
+| `https://www.glideapps.com/legal/glide-os/privacy` | Privacy policy, in the manifest and the listing |
+| `https://www.glideapps.com/legal/glide-os/terms` | EULA and the plugin's `legal_info_url` |
+| `https://www.glideapps.com/support` | Support document, and the manifest's `websiteUrl` |
+| `https://mcp.glideapps.dev/mcp` | The MCP endpoint the agent connector points at |
+
+Re-check them before any resubmission. A 404 on the privacy or terms link is one of the
+five errors behind most rejections.
+
 ### 4. Partner Center
 
 - [ ] A Partner Center account whose **business verification** is complete. A Microsoft AI Cloud Partner Program account works; registration for this program is free.
