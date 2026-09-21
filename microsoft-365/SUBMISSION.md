@@ -81,16 +81,15 @@ Partner Center collects the store listing outside the package. The manifest's `n
 
 - [x] Privacy policy `https://www.glideapps.com/legal/privacy` and terms `https://www.glideapps.com/legal/terms` in `manifest.json` and `ai-plugin.json`.
 - [x] Support contact `support@glideapps.com` in `ai-plugin.json`.
-- [x] Screenshots captured and sized 2026-09-21: seven candidates at 1366x768, all well under 1024 KB. Four show the agent inside Microsoft 365 Copilot (listing projects, reading a database, asking for confirmation before a change, and completing it) and three show the published demo app. Browser chrome and the signed-in user's name were cropped out, and one production URL naming the internal test org was masked. No product content was altered.
-- [ ] Pick five for the listing. Suggested order: the Copilot confirmation prompt leads, since validation guideline 9 grades disclosure and confirmation for actions.
-- [ ] **Recapture two Copilot screenshots under the right agent name.** The captured shots show the sideloaded copy's name (`glide-m365dev`); the listing publishes as **Glide**. Cosmetic, not a validation failure, and screenshots can be swapped later in an update (which re-runs validation). To fix it now:
-  1. In the Agents Toolkit test project, set `name.short` and `name.full` to `Glide` in `appPackage/manifest.json` (removing `${{APP_NAME_SUFFIX}}`), `name` to `Glide` in `appPackage/declarativeAgent.json`, and `name_for_human` to `Glide` in `appPackage/ai-plugin.json`.
-  2. Provision, then open a new Copilot chat.
-  3. Retake two shots: the projects answer, and the create-project prompt captured **at the confirmation step, before replying**. That second one is the strongest asset in the set, because validation guideline 9 grades disclosure and confirmation for actions.
-  4. Delete the created project afterwards so the fifth conversation starter stays runnable.
+- [x] **Screenshots final.** Five images at 1366x768, all under 1024 KB, captured 2026-09-21 against the reviewer org after the test agent was renamed to **Glide** and given the package icons, so the name and logo match the listing:
+  1. Copilot listing the org's projects, apps, and workflows.
+  2. Copilot reading the project's live database schema.
+  3. Copilot naming a proposed change and waiting for confirmation. Lead with this one: validation guideline 9 grades disclosure and confirmation for actions.
+  4. Copilot reporting the change after the user approved it.
+  5. One screen of the published demo app.
+  Browser chrome, the signed-in user's name, and one production URL naming the internal test org were removed. No product content was altered. Two further app screens are held in reserve.
 - [ ] Optional demo video (YouTube or Vimeo link).
 - [ ] Category, markets, and pricing (the agent itself is free; access is gated by the user's Glide plan).
-- [ ] Re-read `description.full` in `manifest.json` against the live tool list before every submission. It summarizes the tools captured from `mcp.glideapps.dev` on 2026-09-15 (the same list as `microsoft/intro.md`).
 
 ### 3. Test account (support)
 
