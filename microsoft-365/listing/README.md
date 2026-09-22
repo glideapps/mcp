@@ -20,8 +20,9 @@ was renamed to **Glide** and given the package icons so the name and logo match 
 listing. Browser chrome, the signed-in user's name, and one production URL naming the
 internal test org were cropped or masked. No product content was altered.
 
-`glide-testing-instructions.pdf` is the illustrated form of `../TEST-NOTES.md`. **It still
-carries the three credential placeholders** — regenerate it with the real reviewer account
-before uploading, or upload the notes without it. Microsoft's guidance is explicit that
+`glide-testing-instructions.pdf` is the illustrated form of `../TEST-NOTES.md`. **Both keep
+the credential placeholders on purpose: this repository is public, so the reviewer account's
+real sign-in details are never committed here.** The filled versions are produced outside the
+repo and uploaded straight to Partner Center, which does not show them to customers. Microsoft's guidance is explicit that
 reviewers cannot contact the publisher for sign-in details and that a submission without
 clear instructions fails automatically.

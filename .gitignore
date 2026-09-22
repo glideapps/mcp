@@ -1,1 +1,6 @@
 microsoft-365/glide-microsoft-365.zip
+
+# Filled-in reviewer credentials must never be committed. The redacted
+# microsoft-365/TEST-NOTES.md is the only version that belongs in this repo.
+*-FINAL.md
+*-FINAL.pdf
