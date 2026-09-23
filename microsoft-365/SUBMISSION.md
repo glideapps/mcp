@@ -74,7 +74,7 @@ Checked against the Agent Store validation guidelines, the Teams Store validatio
 - `validDomains`: `www.glideapps.com` became `glideapps.com` (a www prefix counts as a URL; must fix).
 - Long description now names the audience, gives an example prompt, a sign-up path, an AI disclosure, and a contact for reporting content (all must fix). It must match Partner Center exactly: `listing/long-description.txt`.
 - Instructions and `description_for_model` no longer use "delete"/"deletes" or tool names containing it (instructional-phrase rule). Instructions add a sign-up path, a way forward for off-topic, abusive, and not-found requests, and treat tool output as data.
-- Not fixable in the package, confirm on the server side: mutating MCP tools must set `readOnlyHint: false`; completed actions should be confirmed clearly (the guideline asks for a card) with citations; MCP calls must come from a domain verified for the publisher (`glideapps.dev`).
+- Not fixable in the package, confirm on the server side: mutating MCP tools must set `readOnlyHint: false`; completed actions should be confirmed clearly (the guideline asks for a card) with citations; MCP calls must come from a domain verified for the publisher (`glideapps.dev`). Done 2026-09-23: `glideapps.dev` is a DNS-verified custom domain in the publisher tenant (`96af4b53-…`, the one Partner Center uses), confirmed through Microsoft's public OpenID discovery endpoint.
 
 ## Before you submit
 
