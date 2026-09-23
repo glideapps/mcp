@@ -56,6 +56,16 @@ A throwaway Agents Toolkit project with the same plugin shape was provisioned an
 
 Both blockers are cleared, so the package ships as built: manifest v1.29, `DynamicClientRegistration` authorization, dynamic tool discovery. A pinned-tool fallback remains available if Microsoft's validation ever objects: capture `tools/list` into `toolDescription.json`, reference it from `mcpToolDescription.file` in `manifest.json` and `mcp_tool_description.file` in `ai-plugin.json`, and list the tools in `functions` and `run_for_functions`. The checker rejects that shape on purpose; relax it only if that decision is made.
 
+### Certification failure 2026-09-23 (ticket #5808021) and fix
+
+Microsoft's reviewers, in their own tenant, got no Sign In option in the agent, and the connector reported "not connected". Cause: the Agents Toolkit project's `dcr/register` step had `targetAudience: HomeTenant`, so the auth config only resolved in `glideos.onmicrosoft.com`. Every test ran in that tenant, so none could catch it. The Toolkit cannot edit a DCR config after creation (its source notes "TGS exposes no GET for DCR", and Provision skips when the env var is set), so the fix needed a new config:
+
+- `m365agents.yml` → `dcr/register` → `targetAudience: AnyTenant` (`applicableToApps: AnyApp` unchanged).
+- `env/.env.dev` → `MCP_DA_AUTH_ID_MCPGLIDEAP=` emptied, then Provision.
+- New auth config `ae1fa153-495f-4dcd-a32d-69fcaa135be3` (old `3a24aceb-…`, home tenant only) in `manifest.json` and `ai-plugin.json`; version 1.0.1.
+
+**Rule for any future auth config:** it must be `AnyTenant`, and a package is not ready until it has signed in from a second Microsoft 365 tenant. Testing only in the home tenant cannot detect this failure.
+
 ## Before you submit
 
 Run the offline checker after every edit:

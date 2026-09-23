@@ -29,7 +29,7 @@
       "type": "RemoteMCPServer",
       "auth": {
         "type": "OAuthPluginVault",
-        "reference_id": "OTZhZjRiNTMtMjljYS00NjMxLTgyYzQtYzgzYjMyMzA3YzNlIyMzYTI0YWNlYi03ZDljLTQ5NzQtODlmMC05YTQ1NTM1NjVjZDQ="
+        "reference_id": "OTZhZjRiNTMtMjljYS00NjMxLTgyYzQtYzgzYjMyMzA3YzNlIyNhZTFmYTE1My00OTVmLTRkY2QtYTMyZC02OWZjYWExMzViZTM="
       },
       "spec": {
         "url": "https://mcp.glideapps.dev/mcp"
