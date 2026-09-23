@@ -66,6 +66,16 @@ Microsoft's reviewers, in their own tenant, got no Sign In option in the agent, 
 
 **Rule for any future auth config:** it must be `AnyTenant`, and a package is not ready until it has signed in from a second Microsoft 365 tenant. Testing only in the home tenant cannot detect this failure.
 
+### Pre-resubmission audit (2026-09-23, version 1.0.3)
+
+Checked against the Agent Store validation guidelines, the Teams Store validation guidelines, and the official v1.29 / v1.8 / v2.4 schemas from `@microsoft/app-manifest` 1.1.2.
+
+- `manifest.json` and `declarativeAgent.json` validate against their official schemas. `ai-plugin.json` trips only the schema's `oneOf` for `runtimes[].spec`: a bare `{ "url" }` satisfies both `open-api-spec` and `mcp-execution-spec`. The schema itself says an MCP spec without `mcp_tool_description` "MUST use dynamic tool discovery", so this is the documented shape; the Toolkit's `validateAppPackage` and Partner Center both accept it.
+- `validDomains`: `www.glideapps.com` became `glideapps.com` (a www prefix counts as a URL; must fix).
+- Long description now names the audience, gives an example prompt, a sign-up path, an AI disclosure, and a contact for reporting content (all must fix). It must match Partner Center exactly: `listing/long-description.txt`.
+- Instructions and `description_for_model` no longer use "delete"/"deletes" or tool names containing it (instructional-phrase rule). Instructions add a sign-up path, a way forward for off-topic, abusive, and not-found requests, and treat tool output as data.
+- Not fixable in the package, confirm on the server side: mutating MCP tools must set `readOnlyHint: false`; completed actions should be confirmed clearly (the guideline asks for a card) with citations; MCP calls must come from a domain verified for the publisher (`glideapps.dev`).
+
 ## Before you submit
 
 Run the offline checker after every edit:

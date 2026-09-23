@@ -96,6 +96,19 @@ function checkNoUrls(fileName, label, value) {
   }
 }
 
+// Agent Store guidelines forbid these instructional phrases in short
+// descriptions, instructions, conversation starters, and the plugin's
+// descriptions, because they read as attempts to steer the model.
+const instructionalPhrasePattern =
+  /\b(ignore\w*|delet\w*|reset\w*|new instructions|answer in bold|do not print|don't print|if the user says)\b|_delete\b/i;
+
+function checkNoInstructionalPhrases(fileName, label, value) {
+  const match = typeof value === "string" ? value.match(instructionalPhrasePattern) : null;
+  if (match) {
+    addError(`${fileName}: ${label} contains "${match[0]}", which the Agent Store guidelines treat as an instructional phrase.`);
+  }
+}
+
 function checkStarters(fileName, starters, label) {
   if (!Array.isArray(starters)) {
     addError(`${fileName}: ${label} must be an array.`);
@@ -166,6 +179,11 @@ function validateManifest(manifest) {
   checkLength(file, "description.full", manifest.description?.full, 4000);
   checkNoUrls(file, "description.short", manifest.description?.short);
   checkNoUrls(file, "description.full", manifest.description?.full);
+  checkNoInstructionalPhrases(file, "description.short", manifest.description?.short);
+  const longWords = (manifest.description?.full ?? "").split(/\s+/).filter(Boolean).length;
+  if (longWords > 500) {
+    addError(`${file}: description.full has ${longWords} words; the Teams Store limit is 500.`);
+  }
 
   if (manifest.icons?.color !== "color.png" || manifest.icons?.outline !== "outline.png") {
     addError(`${file}: icons.color must be "color.png" and icons.outline must be "outline.png".`);
@@ -232,6 +250,11 @@ function validateDeclarativeAgent(agent) {
   checkLength(file, "instructions", agent.instructions, 8000);
   checkNoUrls(file, "description", agent.description);
   checkStarters(file, agent.conversation_starters, "conversation_starters");
+  checkNoUrls(file, "instructions", agent.instructions);
+  checkNoInstructionalPhrases(file, "instructions", agent.instructions);
+  for (const [index, starter] of (agent.conversation_starters ?? []).entries()) {
+    checkNoInstructionalPhrases(file, `conversation_starters[${index}]`, `${starter.title} ${starter.text}`);
+  }
   if (!Array.isArray(agent.actions) || agent.actions.length < 1 || agent.actions.length > 10) {
     addError(`${file}: actions must contain between 1 and 10 entries.`);
   } else if (!agent.actions.some((action) => action.file === "ai-plugin.json" && action.id)) {
@@ -252,6 +275,8 @@ function validatePlugin(plugin) {
   checkLength(file, "description_for_model", plugin.description_for_model, 2048, { required: false });
   checkNoUrls(file, "description_for_human", plugin.description_for_human);
   checkNoUrls(file, "description_for_model", plugin.description_for_model);
+  checkNoInstructionalPhrases(file, "description_for_human", plugin.description_for_human);
+  checkNoInstructionalPhrases(file, "description_for_model", plugin.description_for_model);
   for (const key of ["legal_info_url", "privacy_policy_url"]) {
     if (!httpsPattern.test(plugin[key] ?? "")) {
       addError(`${file}: ${key} must be an https URL.`);
