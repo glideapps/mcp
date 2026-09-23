@@ -152,6 +152,14 @@ function validateManifest(manifest) {
     }
   }
 
+  // Partner Center rejects validDomains entries that look like URLs, and its
+  // guidelines count a "www" prefix as one (ValidDomainsContainsUrl).
+  for (const domain of manifest.validDomains ?? []) {
+    if (/:\/\/|\/|:/.test(domain) || /^www\./i.test(domain) || !/^(\*\.)?[a-z0-9-]+(\.[a-z0-9-]+)+$/i.test(domain)) {
+      addError(`${file}: validDomains entry "${domain}" must be a bare domain, with no scheme, path, port, or www prefix.`);
+    }
+  }
+
   checkLength(file, "name.short", manifest.name?.short, 30);
   checkLength(file, "name.full", manifest.name?.full, 100, { required: false });
   checkLength(file, "description.short", manifest.description?.short, 80);
