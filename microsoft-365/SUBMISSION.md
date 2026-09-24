@@ -134,7 +134,7 @@ Remaining checklist:
 - [ ] Create a reviewer account in that org and note the credentials for the submission form.
 - [ ] Refresh the seeded dates before submitting. They are anchored to 2026-09-21, so after a few weeks everything reads as overdue. Re-running `Overdue Sweep` is harmless; it records at most one reminder per checkout per day.
 - [ ] Leave **Inventory Tracker** uncreated. One conversation starter asks the agent to create a project by that name, so it has to be absent for that starter to work.
-- [ ] Write the test notes: sign-in steps, which project to use, which tools require human confirmation (shell scripts, backend code, destructive SQL, database restores, project deletion, app access changes), and which tools are safe to exercise destructively.
+- [x] Write the test notes (`TEST-NOTES.md`): sign-in steps, the read-only demo project and the Sandbox project for destructive tests, and a prompt for every tool. Only shell scripts (`bash`) and backend code (`run_backend_code`) are refused by the server until a human approves; tested 2026-09-24, `db_restore_from_backup`, `project_delete`, and `app_set_access` run without `confirmed`, so for those the agent instructions are the only confirmation step.
 
 ### 3b. Links (confirmed 2026-09-21)
 
@@ -202,7 +202,7 @@ The checks that apply to this package, from the [Agent Store validation guidelin
 2. **Descriptions.** No URLs, emojis, instructional phrases, or superlatives in any description field, including `description_for_model`. The checker rejects URLs.
 3. **Name.** `name.short` in `manifest.json`, `name` in `declarativeAgent.json`, and `name_for_human` in `ai-plugin.json` must be identical. All three are `Glide`.
 4. **Prompts.** At least three conversation starters, each 128 characters or fewer, no duplicates, and every one must work. The package ships five.
-5. **Actions.** Tools that change data need clear user disclosure and confirmation. The server enforces human approval for its high-impact tools, and the agent instructions require confirmation before any change; describe both in the test notes.
+5. **Actions.** Tools that change data need clear user disclosure and confirmation. The agent instructions require confirmation before any change, and the server additionally refuses `bash` and `run_backend_code` until a human approves; the test notes describe both.
 6. **Security.** HTTPS with TLS 1.2 or higher, no redirects, and the server domain must be one Glide owns. `validDomains` lists `mcp.glideapps.dev` and `www.glideapps.com`; expect to prove control of both.
 7. **Responsible AI.** Manifest validation rejects names, descriptions, or instructions that encourage harm, provoke arguments, try to bypass guidelines, or reproduce copyrighted material. With dynamic tool discovery, Microsoft also screens every newly discovered or changed tool at runtime with Responsible AI and cross-prompt-injection classifiers before it is activated.
 8. **Performance.** 99.9 percent availability; responses within nine seconds at the 99th percentile.
