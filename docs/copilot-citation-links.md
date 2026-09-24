@@ -31,7 +31,7 @@ Checked against the live server:
 ## What to change
 
 1. Any tool result tied to a project gets:
-   - `url`: the link that opens that project in Glide OS, built from the org ID and project ID.
+   - `url`: a link that opens the project in Glide OS. The confirmed format is the org's projects page, `https://os.glideapps.dev/o/{orgId}/projects`. If a page for a single project exists, use it instead.
    - `title`: the project name, or the app, table or workflow name.
 2. List results return items under `results`, or add `results` next to the existing key so current clients don't break. Each item gets its own `url` and `title`.
 3. Order of work:
@@ -40,7 +40,7 @@ Checked against the live server:
 
 ## Needs your input
 
-The exact URL format that opens a project in Glide OS. It isn't in any tool result or in the MCP's guidance resources, so it isn't filled in here.
+Whether a URL for a single project exists. If it does, each project's results can link to their own project. If not, every result links to the org's projects page.
 
 ## Package impact
 
