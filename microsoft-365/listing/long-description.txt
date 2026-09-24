@@ -1,6 +1,6 @@
-Glide connects Microsoft 365 Copilot to your GlideOS workspace, so teams that build and run business apps on Glide can manage them from Copilot. Ask Copilot to create and manage projects, query and modify app databases, run workflows, publish and roll back apps, and read, write, and search project files.
+Glide is an agent for Microsoft 365 Copilot. It connects Copilot to your GlideOS workspace, so teams that build and run business apps on Glide can manage them from Copilot. Ask Copilot to create and manage projects, query and modify app databases, run workflows, publish and roll back apps, and read, write, and search project files.
 
-For example, ask: "Show me the tables in the database of my most recently created project."
+For example, ask: "Which of my Glide projects have a database, and what tables are in them?"
 
 Every request runs as you, inside your Glide organization, with your role (admin, editor, or viewer). Copilot can only reach the projects, apps, and data you can open yourself.
 
