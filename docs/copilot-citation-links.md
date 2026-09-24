@@ -31,16 +31,12 @@ Checked against the live server:
 ## What to change
 
 1. Any tool result tied to a project gets:
-   - `url`: a link that opens the project in Glide OS. The confirmed format is the org's projects page, `https://os.glideapps.dev/o/{orgId}/projects`. If a page for a single project exists, use it instead.
+   - `url`: the project's page in Glide OS, `https://os.glideapps.dev/o/{orgId}/p/{projectId}`.
    - `title`: the project name, or the app, table or workflow name.
 2. List results return items under `results`, or add `results` next to the existing key so current clients don't break. Each item gets its own `url` and `title`.
 3. Order of work:
    - The tools behind the conversation starters first: `project_list`, `db_list_tables`, `list_workflow_apps`, `app_runtime_errors`, `project_create`.
    - Then every other tool. The reviewer said "all functions".
-
-## Needs your input
-
-Whether a URL for a single project exists. If it does, each project's results can link to their own project. If not, every result links to the org's projects page.
 
 ## Package impact
 
