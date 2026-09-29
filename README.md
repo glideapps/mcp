@@ -137,10 +137,20 @@ python3 scripts/generate-plugin-index.py --check
 
 To ship a plugin update after this repo changes, bump the pinned `sha` in that entry and regenerate the index — don't open a second entry.
 
-## Support
+## Support and legal
+
+These are the canonical URLs for every directory and marketplace listing of the Glide MCP server. Use them as-is when a submission form asks for them.
+
+| Field | URL |
+| --- | --- |
+| Product website | https://www.glideapps.com |
+| MCP documentation | https://www.glideapps.com/docs/os/mcp |
+| Support | https://www.glideapps.com/support |
+| Support email | support@glideapps.com |
+| Privacy policy | https://www.glideapps.com/legal/glide-os/privacy |
+| Terms of service | https://www.glideapps.com/legal/glide-os/terms |
 
 - Glide documentation: https://www.glideapps.com/docs
-- Product questions and account help: https://www.glideapps.com/support
 - Bugs in the Cursor plugin, Grok Build plugin, Gemini CLI extension, or Agent Plugin manifests, or errors in this README: open an issue on this repository
 
 ## License
