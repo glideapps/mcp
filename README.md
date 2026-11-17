@@ -1,6 +1,6 @@
 # Glide MCP Server
 
-Connect your AI tools to [Glide](https://www.glideapps.com)'s official MCP server and build, manage, and operate GlideOS apps, data, and workflows — from Claude, Cursor, VS Code, Gemini CLI, ChatGPT, or any MCP client.
+Connect your AI tools to [Glide](https://www.glideapps.com)'s official MCP server and build, manage, and operate GlideOS apps, data, and workflows — from Claude, Cursor, VS Code, Codex, OpenCode, Gemini CLI, ChatGPT, or any MCP client.
 
 - **Endpoint:** `https://mcp.glideapps.dev/mcp` (Streamable HTTP)
 - **Authentication:** OAuth 2.1 — sign in with your Glide account when your client prompts you; no API keys to manage. Access requires a [Glide plan](https://www.glideapps.com/pricing) that includes the MCP server feature.
@@ -68,6 +68,38 @@ The [`plugins/glide`](plugins/glide) directory doubles as a Grok Build plugin: `
 ```bash
 code --add-mcp '{"name":"glide","type":"http","url":"https://mcp.glideapps.dev/mcp"}'
 ```
+
+### Codex
+
+```bash
+codex mcp add glide --url https://mcp.glideapps.dev/mcp
+codex mcp login glide
+```
+
+The login command opens your browser to sign in to Glide. Or add the server to `~/.codex/config.toml` yourself, then run `codex mcp login glide`:
+
+```toml
+[mcp_servers.glide]
+url = "https://mcp.glideapps.dev/mcp"
+```
+
+### OpenCode
+
+Add Glide under `mcp` in `opencode.json` (in your project, or globally at `~/.config/opencode/opencode.json`):
+
+```json
+{
+  "mcp": {
+    "glide": {
+      "type": "remote",
+      "url": "https://mcp.glideapps.dev/mcp",
+      "enabled": true
+    }
+  }
+}
+```
+
+OpenCode prompts you to sign in to Glide the first time the server connects. If it doesn't, run `opencode mcp auth glide`.
 
 ### Gemini CLI
 
